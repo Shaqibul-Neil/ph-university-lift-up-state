@@ -1,12 +1,23 @@
 import Container from "./Container";
-const ToggleButtons = () => {
+
+const ToggleButtons = ({ toggle, setToggle }) => {
+  const btns = ["All", "Pending", "Submitted", "Reviewed"];
   return (
     <Container>
       <div className="text-right mb-12">
-        <button className="toggle-btn rounded-l-md">All</button>
-        <button className="toggle-btn">Pending</button>
-        <button className="toggle-btn">Submitted</button>
-        <button className="toggle-btn rounded-r-md">Reviewed</button>
+        {btns.map((btn, i) => (
+          <button
+            className={`toggle-btn ${
+              toggle === btn && "!bg-purple-500 !text-white"
+            } ${i === 0 && "rounded-l-md"} ${
+              i === btns.length - 1 && "rounded-r-md"
+            }`}
+            onClick={() => setToggle(btn)}
+            key={i}
+          >
+            {btn}
+          </button>
+        ))}
       </div>
     </Container>
   );

@@ -2,6 +2,7 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import BannerCountBoxes from "./components/BannerCountBoxes";
 import ToggleButtons from "./components/ToggleButtons";
+import { useState } from "react";
 
 const fetchData = async () => {
   try {
@@ -14,11 +15,12 @@ const fetchData = async () => {
 const fetchPromise = fetchData();
 
 function App() {
+  const [toggle, setToggle] = useState("All");
   return (
     <>
       <Navbar />;
       <BannerCountBoxes fetchPromise={fetchPromise} />;
-      <ToggleButtons />
+      <ToggleButtons toggle={toggle} setToggle={setToggle} />
     </>
   );
 }
