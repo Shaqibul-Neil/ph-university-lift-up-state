@@ -16,7 +16,7 @@ function App() {
   const fetchPromise = fetchIssues();
   return (
     <>
-      <Navbar />;
+      <Navbar />
       <Suspense fallback={"loading"}>
         <IssuesManagement fetchPromise={fetchPromise} />
       </Suspense>

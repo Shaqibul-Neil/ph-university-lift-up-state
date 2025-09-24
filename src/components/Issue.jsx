@@ -1,5 +1,4 @@
-const Issue = ({ issue }) => {
-  console.log(issue);
+const Issue = ({ issue, data, setData }) => {
   const {
     userImg,
     requestedBy,
@@ -26,10 +25,28 @@ const Issue = ({ issue }) => {
       return `bg-green-100 text-green-500 rounded px-3 py-1`;
   };
 
+  const handleIssueStatus = () => {
+    const curData = data.find((el) => el.ticketId === ticketId);
+    const restData = data.filter((el) => el.ticketId !== ticketId);
+    curData.status === "Pending"
+      ? (curData.status = "Submitted")
+      : (curData.status = "Reviewed");
+    setData([...restData, curData]);
+    console.log({ curData, restData });
+  };
+
   return (
-    <div className="shadow-2xl p-4 rounded-md space-y-3">
+    <div
+      className="shadow-2xl p-4 rounded-md space-y-3 cursor-pointer"
+      onClick={() => handleIssueStatus()}
+    >
       <div className="w-16 h-16 ">
-        <img src={userImg} alt={requestedBy} className="rounded-full" />
+        <img
+          src={userImg}
+          alt={requestedBy}
+          title={requestedBy}
+          className="rounded-full"
+        />
       </div>
       <h3 className="text-base font-bold">{requestedBy}</h3>
       <div className="flex justify-between items-center">
@@ -39,7 +56,7 @@ const Issue = ({ issue }) => {
           <div className={`${handleStatusClasses()}`}>{status}</div>
         </div>
       </div>
-      <p className="text-gray-500">{description}</p>
+      <p className="text-slate-500">{description}</p>
     </div>
   );
 };
