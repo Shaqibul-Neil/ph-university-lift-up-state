@@ -1,6 +1,7 @@
 import "./App.css";
 import Navbar from "./components/Navbar";
 import IssuesManagement from "./components/IssuesManagement";
+import Footer from "./components/Footer";
 import { Suspense } from "react";
 
 const fetchIssues = async () => {
@@ -20,6 +21,7 @@ function App() {
       <Suspense fallback={"loading"}>
         <IssuesManagement fetchPromise={fetchPromise} />
       </Suspense>
+      <Footer />
     </>
   );
 }
